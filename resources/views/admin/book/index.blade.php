@@ -18,6 +18,8 @@
                 <th>Titre</th>
                 <th>Auteur</th>
                 <th>Genre</th>
+                <th>Image</th>
+                <th>Contenu</th>
                 <th>Description</th>
                 <th class="text-end">Actions</th>
             </tr>
@@ -28,6 +30,12 @@
                     <td>{{ $book->title}}</td>
                     <td>{{ $book->author}}</td>
                     <td>{{ $book->genre}}</td>
+                    <td>
+                        <img src="/storage/{{ $book->cover_image }}" style="width: 50px; height:50px;" alt="Img" >
+                    </td>
+                    <td>
+                        
+                    </td>
                     <td>{{ $book->description}}</td>
                     <td>
                         <div class="d-flex gap-2 w-100 justify-content-end">

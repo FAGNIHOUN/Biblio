@@ -24,8 +24,7 @@ class BookController extends Controller
 
 
 
-        // $books = Book::orderBy('created_at', 'desc')->get();
-        // $books = Book::paginate(16); 
+        // $books = Book::paginate(16);
         return view('book.index',['books' => $query->paginate(16),'input' => $request->validated()]);
 
 

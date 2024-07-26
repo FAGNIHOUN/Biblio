@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\BookFormRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\BookFormRequest;
 
 class BookController extends Controller
 {
@@ -35,7 +36,30 @@ class BookController extends Controller
      */
     public function store(BookFormRequest $request)
     {
-        $book = Book::create($request->validated());
+        $data = $request->validated();
+
+        if($request->hasFile('cover_image')){
+            $file = $request->file('cover_image');
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $path = $file->storeAs('cover_images', $filename, 'public');
+
+            $data['cover_image'] = $path;
+
+            //dd($request->all());
+        }
+
+        if($request->hasFile('content_file')){
+            $file = $request->file('content_file');
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $path = $file->storeAs('pdfs', $filename, 'public');
+
+            $data['content_file'] = $path;
+
+            //dd($request->all());
+        }
+
+
+        $book = Book::create($data);
         return to_route('admin.book.index')->with('success', 'Le livre à été enregistré avec succès');
     }
 
@@ -62,7 +86,36 @@ class BookController extends Controller
      */
     public function update(BookFormRequest $request, Book $book)
     {
-        $book->update($request->validated());
+        $data = $request->validated();
+
+        if($request->hasFile('cover_image')){
+            $file = $request->file('cover_image');
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $path = $file->storeAs('cover_images', $filename, 'public');
+
+            $data['cover_image'] = $path;
+
+            //dd($request->all());
+            if($book->cover_image){
+                Storage::disk('public')->delete($book->cover_image);
+            }
+        }
+
+        if($request->hasFile('content_file')){
+            $file = $request->file('content_file');
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            $path = $file->storeAs('pdfs', $filename, 'public');
+
+            $data['content_file'] = $path;
+
+            //dd($request->all());
+            if($book->content_file){
+                Storage::disk('public')->delete($book->content_file);
+            }
+        }
+
+
+        $book->update($data);
         return to_route('admin.book.index')->with('success', 'Les informations du livre ont été modifié avec succès');
 
     }
@@ -76,4 +129,6 @@ class BookController extends Controller
 
         return to_route('admin.book.index')->with('success', 'Les informations du livre ont été supprimé avec succès');
     }
+
+
 }

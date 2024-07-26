@@ -26,6 +26,8 @@ class BookFormRequest extends FormRequest
             'author' => ['required', 'min:1'],
             'genre' => ['required', 'min:1'],
             'description' => ['required', 'min:8'],
+            'cover_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:3072'],
+            'content_file' =>['nullable','file','mimes:pdf,epub','max:2048']
         ];
     }
 }
