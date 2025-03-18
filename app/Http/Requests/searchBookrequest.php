@@ -23,9 +23,9 @@ class searchBookrequest extends FormRequest
     {
         return [
 
-        'title' => ['nullable', 'min:0'],
-        'author' => ['nullable', 'min:0'],
-        'genre' => ['nullable', 'min:0']
+        'title' => ['nullable', 'min:1'],
+        'author' => ['nullable', 'min:1'],
+        'genre' => ['nullable', 'min:1']
         ];
     }
 }

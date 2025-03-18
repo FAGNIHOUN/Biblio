@@ -14,8 +14,8 @@
             {{ $book->author }}
         </div>
 
-        <button class="btn btn-primary" > Lire le lire </button>
-        <button class="btn btn-primary"> Télécharger le lire </button>
+        <button class="btn btn-primary" > Lire le livre </button>
+        <button class="btn btn-primary"> Télécharger le livre </button>
         
     </div>
 @endsection

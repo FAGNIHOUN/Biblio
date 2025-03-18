@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     public function login(){
-        /* User::create([
-            'name' => 'Fid',
-            'email' => 'fagnihoun205@gmail.com',
-            'password' => Hash::make('00000000'),
-        ]); */
+        //  User::create([
+        //     'name' => 'Fid',
+        //     'email' => 'fagnihoun205@gmail.com',
+        //     'password' => Hash::make('00000000'),
+        // ]); 
 
         return view('auth.login');
     }
